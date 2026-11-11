@@ -2,10 +2,12 @@
 package tasks;
 
 import models.Product;
+import models.SimpleProduct;
 
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.HashSet;
 
 public class EqualsHashCodeTask {
 
@@ -26,6 +28,7 @@ public class EqualsHashCodeTask {
             System.out.println("2. Wyswietl produkty");
             System.out.println("3. Sprawdz rownosc dwoch produktow");
             System.out.println("4. Wyczysc zbior");
+            System.out.println("6. Porownaj obiekty bez equals() i hashCode()");
             System.out.println("0. Powrot do menu glownego");
             System.out.print("Wybor: ");
 
@@ -39,6 +42,7 @@ public class EqualsHashCodeTask {
                     products.clear();
                     System.out.println("Zbior wyczyszczony.");
                 }
+                case 6 -> testWithoutEqualsAndHashCode();
                 case 0 -> System.out.println("Powrot do menu glownego.");
                 default -> System.out.println("Niepoprawny wybor!");
             }
@@ -116,5 +120,22 @@ public class EqualsHashCodeTask {
         double price = scanner.nextDouble();
 
         return new Product(name, serialNumber, price);
+    }
+    private void testWithoutEqualsAndHashCode() {
+        Set<SimpleProduct> products = new HashSet<>();
+
+        SimpleProduct product1 = new SimpleProduct("Laptop", 101, 3000);
+        SimpleProduct product2 = new SimpleProduct("Laptop", 101, 3000);
+
+        products.add(product1);
+        products.add(product2);
+
+        System.out.println("\n===== TEST BEZ EQUALS() I HASHCODE() =====");
+        System.out.println("Dodano dwa obiekty o identycznych danych.");
+        System.out.println("Liczba elementow w HashSet: " + products.size());
+
+        for (SimpleProduct product : products) {
+            System.out.println(product);
+        }
     }
 }
