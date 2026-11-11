@@ -91,6 +91,20 @@ Domyślne `equals()` porównuje tożsamość obiektów. Dwa osobno utworzone obi
 
 Dlatego kolekcje takie jak HashSet mogą przechowywać oba takie obiekty jako odrębne elementy.
 
+### 3.1. Porównanie obiektów z nadpisanymi i domyślnymi metodami
+
+W celu lepszego zobrazowania działania metod `equals()` i `hashCode()` dodano dodatkowy test z wykorzystaniem klasy `SimpleProduct`.
+
+Klasa `SimpleProduct` zawiera te same podstawowe pola co `Product` (nazwę, numer seryjny i cenę), ale nie nadpisuje metod `equals()` oraz `hashCode()`.
+
+W teście tworzone są dwa osobne obiekty posiadające identyczne dane, a następnie dodawane do kolekcji `HashSet`.
+
+**Wynik testu:**
+- W przypadku klasy `Product`, która nadpisuje `equals()` i `hashCode()`, dwa produkty o tym samym numerze seryjnym są traktowane jako jeden element.
+- W przypadku klasy `SimpleProduct`, która korzysta z domyślnych implementacji tych metod, dwa osobne obiekty są traktowane jako dwa różne elementy.
+
+Dzięki temu można zaobserwować, że samo posiadanie identycznych wartości pól nie oznacza automatycznie równości obiektów w Javie. To sposób implementacji `equals()` i `hashCode()` wpływa na zachowanie kolekcji opartych na haszowaniu.
+
 ## 4. Comparable i Comparator
 
 Java udostępnia dwa podstawowe mechanizmy określania kolejności obiektów.
